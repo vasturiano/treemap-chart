@@ -11,7 +11,7 @@ export default {
   output: [
     {
       format: 'umd',
-      name: '__my_global_var_name__',
+      name: 'Treemap',
       file: `dist/${name}.js`,
       sourcemap: true,
       banner: `// Version ${version} ${name} - ${homepage}`

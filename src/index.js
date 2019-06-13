@@ -1,3 +1,3 @@
-import './style.css';
+import './treemap.css';
 
-export { default } from './__my_module_name__';
+export { default } from './treemap';
