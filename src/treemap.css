@@ -1,0 +1,47 @@
+.treemap-viz {
+  cursor: move;
+}
+
+.treemap-viz rect {
+  cursor: pointer;
+  stroke: lightgrey;
+  stroke-opacity: .4;
+  transition: stroke-opacity .4s;
+}
+
+.treemap-viz rect:hover {
+  stroke-opacity: 1;
+  transition: stroke-opacity .05s;
+}
+
+.treemap-viz text {
+  font-size: 12px;
+  font-family: sans-serif;
+  pointer-events: none;
+  dominant-baseline: middle;
+  text-anchor: middle;
+  fill: #404041;
+}
+
+.treemap-viz .light text {
+  fill: #F7F7F7;
+}
+
+.treemap-tooltip {
+  display: none;
+  position: absolute;
+  max-width: 320px;
+  white-space: nowrap;
+  padding: 5px;
+  border-radius: 3px;
+  font: 12px sans-serif;
+  color: #eee;
+  background: rgba(0,0,0,0.65);
+  pointer-events: none;
+}
+
+.treemap-tooltip .tooltip-title {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
