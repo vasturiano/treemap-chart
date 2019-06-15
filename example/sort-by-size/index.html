@@ -1,0 +1,42 @@
+<head>
+  <script src="//unpkg.com/d3"></script>
+
+  <script src="//unpkg.com/treemap-chart"></script>
+  <!--<script src="../../dist/treemap-chart.js"></script>-->
+
+  <style>body { margin: 0 }</style>
+</head>
+<body>
+  <div id="chart"></div>
+
+  <script>
+    const CHILDREN_PROB_DECAY = 0.5; // per level
+    const MAX_CHILDREN = 40;
+    const MAX_VALUE = 100;
+
+    function genNode(name='root', probOfChildren=1) {
+      if (Math.random() < probOfChildren) {
+        return {
+          name,
+          children: [...Array(Math.round(Math.random() * MAX_CHILDREN))]
+            .map((_, i) => genNode(i, probOfChildren - CHILDREN_PROB_DECAY))
+        }
+      } else {
+        return {
+          name,
+          value: Math.round(Math.random() * MAX_VALUE)
+        }
+      }
+    }
+
+    const color = d3.scaleOrdinal(d3.schemePaired);
+
+    Treemap()
+      .data(genNode())
+      .sort((a, b) => b.value - a.value) // sort descending by size
+      .color(d => color(d.name))
+      .showLabels(false)
+      .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
+      (document.getElementById('chart'));
+  </script>
+</body>

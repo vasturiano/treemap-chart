@@ -1,0 +1,25 @@
+<head>
+  <script src="//unpkg.com/d3"></script>
+
+  <script src="//unpkg.com/treemap-chart"></script>
+  <!--<script src="../../dist/treemap-chart.js"></script>-->
+
+  <style>body { margin: 0 }</style>
+</head>
+<body>
+  <div id="chart"></div>
+
+  <script>
+    const color = d3.scaleOrdinal(d3.schemePaired);
+
+    fetch('flare.json').then(res => res.json()).then(data => {
+      Treemap()
+        .data(data)
+        .label('name')
+        .size('size')
+        .color((d, parent) => color(parent ? parent.data.name : null))
+        .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
+        (document.getElementById('chart'));
+    });
+  </script>
+</body>
