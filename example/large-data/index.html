@@ -35,6 +35,7 @@
       .data(genNode())
       .color(d => color(d.name))
       .showLabels(false)
+      .minBlockArea(500)
       .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
       (document.getElementById('chart'));
   </script>

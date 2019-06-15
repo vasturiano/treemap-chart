@@ -8,8 +8,8 @@ import Kapsule from 'kapsule';
 import tinycolor from 'tinycolor2';
 import accessorFn from 'accessor-fn';
 
-const LABELS_OPACITY_SCALE = scaleLinear().domain([15, 40]).range([0, 1]);
-const TRANSITION_DURATION = 750;
+const LABELS_OPACITY_SCALE = scaleLinear().domain([25, 60]).range([0, 1]);
+const TRANSITION_DURATION = 800;
 
 export default Kapsule({
 
@@ -30,6 +30,7 @@ export default Kapsule({
       default: 'value',
       onChange: function() { this.zoomReset(); this._parseData(); }
     },
+    padding: { default: 2.5, onChange: function() { this._parseData(); }},
     color: { default: d => 'lightgrey' },
     minBlockArea: { default: 100 },
     showLabels: { default: true },
@@ -48,10 +49,18 @@ export default Kapsule({
     zoomToNode: function(state, d = {}) {
       const node = d.__dataNode;
       if (node) {
+        const k = Math.min(state.width / (node.x1 - node.x0), state.height / (node.y1 - node.y0));
+
         const tr = {
-          k: Math.min(state.width / (node.x1 - node.x0), state.height / (node.y1 - node.y0)),
-          x: -node.x0,
-          y: -node.y0
+          k,
+          x: -Math.max(0, Math.min(
+            state.width * (1 - 1 / k), // Don't pan out of chart boundaries
+            node.x0 - (state.width / k - (node.x1 - node.x0)) / 2 // Center block in view
+          )),
+          y: -Math.max(0, Math.min(
+            state.height * (1 - 1 / k),
+            node.y0 - (state.height / k - (node.y1 - node.y0)) / 2
+          ))
         };
 
         state.zoom.zoomTo(tr, TRANSITION_DURATION);
@@ -70,7 +79,7 @@ export default Kapsule({
         d3Treemap()
           //.padding(1)
           //.round(true)
-          .paddingInner(2)
+          .paddingInner(state.padding)
           .size([state.width, state.height])(hierData);
 
         hierData.descendants().forEach((d, i) => {
@@ -126,18 +135,6 @@ export default Kapsule({
 
     state.svg
       .on('click', () => (state.onClick || this.zoomReset)(null)); // By default reset zoom when clicking on canvas
-
-    //
-
-    function handleZoom() {
-      const tr = state.zoomTransform = d3Event.transform;
-      // state.canvas.attr('transform', tr);
-      state.canvas.attr('transform', `translate(${tr.x},${tr.y}) scale(${tr.k})`);
-      state.svg.selectAll('rect').attr('stroke-width', 1/tr.k);
-      state.svg.selectAll('text').attr('transform', `scale(${1/tr.k})`);
-      state.svg.selectAll('.label-container')
-        .attr('opacity', d => LABELS_OPACITY_SCALE((d.y1 - d.y0)*tr.k));
-    }
   },
   update: function(state) {
     state.svg
@@ -182,8 +179,7 @@ export default Kapsule({
       .attr('id', d => `rect-${d.id}`)
       .attr('width', 0)
       .attr('height', 0)
-      .attr('stroke', 'lightgrey')
-      .attr('stroke-width', 1)
+      .style('stroke-width', 1)
       .on('click', d => {
         d3Event.stopPropagation();
         (state.onClick || this.zoomToNode)(d.data);
@@ -195,13 +191,7 @@ export default Kapsule({
           ${state.tooltipContent(d.data, d)}
         `);
       })
-      .on('mouseout', () => { state.tooltip.style('display', 'none'); })
-      // .style('stroke', 'white')
-      // .style('stroke-width', d => Math.min(1, (d.x1 - d.x0) * BORDER_HEIGHT_RATIO))
-      // .on('mouseenter', function() { d3Select(this).style('stroke-width', 1); })
-      // .on('mouseleave', function() { d3Select(this).style('stroke-width', 0); });
-      .on('mouseenter', function() { d3Select(this).transition().duration(50).attr('opacity', 0.85); })
-      .on('mouseleave', function() { d3Select(this).transition().duration(400).attr('opacity', 1); });
+      .on('mouseout', () => { state.tooltip.style('display', 'none'); });
 
     newCell.append('clipPath')
       .attr('id', d => `clip-${d.id}`)
@@ -225,7 +215,7 @@ export default Kapsule({
       .attr('width', d => d.x1 - d.x0)
       .attr('height', d => d.y1 - d.y0)
       .style('fill', d => colorOf(d.data, d.parent))
-      .attr('stroke-width', 1/zoomTr.k);
+      .style('stroke-width', 1 / zoomTr.k);
 
     allCells.select('g.label-container')
       .style('display', state.showLabels ? null : 'none')
@@ -241,7 +231,7 @@ export default Kapsule({
         .classed('light', d => !tinycolor(colorOf(d.data, d.parent)).isLight())
         .text(d => nameOf(d.data))
         .transition(transition)
-          .style('opacity', d => LABELS_OPACITY_SCALE((d.y1 - d.y0)))
+          .style('opacity', d => LABELS_OPACITY_SCALE((d.x1 - d.x0) * zoomTr.k))
           .attrTween('transform', function () {
             const kTr = d3Interpolate(prevK, zoomTr.k);
             return t => `scale(${1 / kTr(t)})`;

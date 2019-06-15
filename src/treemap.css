@@ -6,12 +6,15 @@
   cursor: pointer;
   stroke: lightgrey;
   stroke-opacity: .4;
-  transition: stroke-opacity .4s;
+  opacity: .85;
+  transition-property: stroke-opacity, opacity;
+  transition-duration: .4s;
 }
 
 .treemap-viz rect:hover {
   stroke-opacity: 1;
-  transition: stroke-opacity .05s;
+  opacity: 1;
+  transition-duration: .05s;
 }
 
 .treemap-viz text {
@@ -23,7 +26,7 @@
   fill: #404041;
 }
 
-.treemap-viz .light text {
+.treemap-viz text.light {
   fill: #F7F7F7;
 }
 
