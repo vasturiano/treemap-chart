@@ -11,7 +11,7 @@ treemap-chart
 
 An interactive treemap chart for visualizing proportions in hierarchical data, where nodes of a tree are represented by layers of rectangular tiles. 
 
-Supports zooming interactions via mouse-wheel events or by clicking on a node, which focuses the view on the associated sub-tree, enabling a gradual exploration of the data.
+Supports zooming interactions via mouse-wheel events or by clicking on a node, which focuses the viewport on the associated sub-tree.
 The chart also responds to data changes by animating the dimensions of each of the nodes into their new positions. 
 
 For improved performance, nodes with area (`width`*`height`) smaller than a given threshold (`minBlockArea`) are excluded from the DOM, allowing for representation of large data sets while maintaining a smooth interaction. See [here for an example](https://vasturiano.github.io/treemap-chart/example/large-data) of a randomly generated large data structure.
