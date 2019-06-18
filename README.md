@@ -16,7 +16,7 @@ The chart also responds to data changes by animating the dimensions of each of t
 
 For improved performance, nodes with area (`width`*`height`) smaller than a given threshold (`minBlockArea`) are excluded from the DOM, allowing for representation of large data sets while maintaining a smooth interaction. See [here for an example](https://vasturiano.github.io/treemap-chart/example/large-data) of a randomly generated large data structure.
 
-See also the [Icicle](https://github.com/vasturiano/icicle-chart) and [Sunburst](https://github.com/vasturiano/sunburst-chart) charts.
+See also the [Circle Pack](https://github.com/vasturiano/circlepack-chart), [Icicle](https://github.com/vasturiano/icicle-chart) and [Sunburst](https://github.com/vasturiano/sunburst-chart) charts.
 
 ## Quick start
 
