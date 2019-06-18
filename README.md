@@ -9,7 +9,7 @@ treemap-chart
      <a href="https://vasturiano.github.io/treemap-chart/example/flare"><img width="80%" src="https://vasturiano.github.io/treemap-chart/example/preview.png"></a>
 </p>
 
-An interactive treemap chart for visualizing proportions in hierarchical data, where nodes of a tree are represented by layers of rectangular tiles. 
+An interactive treemap chart for visualizing proportions in hierarchical data, where nodes of a tree are represented as nested fully-packed rectangular tiles. 
 
 Supports zooming interactions via mouse-wheel events or by clicking on a node, which focuses the viewport on the associated sub-tree.
 The chart also responds to data changes by animating the dimensions of each of the nodes into their new positions. 
