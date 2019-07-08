@@ -4,6 +4,7 @@
   "description": "A treemap interactive chart web component for visualizing hierarchical data",
   "license": "MIT",
   "unpkg": "dist/treemap-chart.min.js",
+  "jsdelivr": "dist/treemap-chart.min.js",
   "main": "dist/treemap-chart.common.js",
   "module": "dist/treemap-chart.module.js",
   "repository": {
