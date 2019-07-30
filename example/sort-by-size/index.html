@@ -36,6 +36,7 @@
       .sort((a, b) => b.value - a.value) // sort descending by size
       .color(d => color(d.name))
       .showLabels(false)
+      .excludeRoot(true)
       .tooltipContent((d, node) => `Size: <i>${node.value}</i>`)
       (document.getElementById('chart'));
   </script>
