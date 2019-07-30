@@ -1,6 +1,6 @@
 {
   "name": "treemap-chart",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "A treemap interactive chart web component for visualizing hierarchical data",
   "license": "MIT",
   "unpkg": "dist/treemap-chart.min.js",
