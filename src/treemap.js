@@ -15,25 +15,20 @@ const TRANSITION_DURATION = 800;
 export default Kapsule({
 
   props: {
-    width: {
-      default: window.innerWidth,
-      onChange: function() { this._parseData(); }
-    },
-    height: {
-      default: window.innerHeight,
-      onChange: function() { this._parseData(); }
-    },
-    data: { onChange: function() { this._parseData(); } },
-    children: { default: 'children', onChange: function() { this._parseData(); }},
-    sort: { onChange: function() { this._parseData(); }},
+    width: { default: window.innerWidth, onChange(_, state) { state.needsReparse = true }},
+    height: { default: window.innerHeight, onChange(_, state) { state.needsReparse = true }},
+    data: { onChange(_, state) { state.needsReparse = true }},
+    children: { default: 'children', onChange(_, state) { state.needsReparse = true }},
+    sort: { onChange(_, state) { state.needsReparse = true }},
     label: { default: d => d.name },
     size: {
       default: 'value',
-      onChange: function() { this.zoomReset(); this._parseData(); }
+      onChange: function(_, state) { this.zoomReset(); state.needsReparse = true; }
     },
-    padding: { default: 2.5, onChange: function() { this._parseData(); }},
+    padding: { default: 2.5, onChange(_, state) { state.needsReparse = true }},
     color: { default: d => 'lightgrey' },
     minBlockArea: { default: 100 },
+    excludeRoot: { default: false, onChange(_, state) { state.needsReparse = true }},
     showLabels: { default: true },
     tooltipContent: { default: d => '', triggerUpdate: false },
     onClick: { triggerUpdate: false }
@@ -88,7 +83,8 @@ export default Kapsule({
           d.data.__dataNode = d; // Dual-link data nodes
         });
 
-        state.layoutData = hierData.descendants();
+        state.layoutData = hierData.descendants()
+          .filter(state.excludeRoot ? d => d.depth > 0 : () => true);
       }
     }
   },
@@ -138,6 +134,11 @@ export default Kapsule({
       .on('click', () => (state.onClick || this.zoomReset)(null)); // By default reset zoom when clicking on canvas
   },
   update: function(state) {
+    if (state.needsReparse) {
+      this._parseData();
+      state.needsReparse = false;
+    }
+
     state.svg
       .style('width', state.width + 'px')
       .style('height', state.height + 'px');
@@ -188,7 +189,13 @@ export default Kapsule({
       .on('mouseover', d => {
         state.tooltip.style('display', 'inline');
         state.tooltip.html(`
-          <div class="tooltip-title">${getNodeStack(d).map(d => nameOf(d.data)).join(' &rarr; ')}</div>
+          <div class="tooltip-title">
+            ${getNodeStack(d)
+              .slice(state.excludeRoot ? 1 : 0)
+              .map(d => nameOf(d.data))
+              .join(' &rarr; ')
+            }
+          </div>
           ${state.tooltipContent(d.data, d)}
         `);
       })
