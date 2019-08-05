@@ -30,6 +30,8 @@ export default Kapsule({
     minBlockArea: { default: 100 },
     excludeRoot: { default: false, onChange(_, state) { state.needsReparse = true }},
     showLabels: { default: true },
+    showTooltip: { default: d => true, triggerUpdate: false},
+    tooltipTitle: { default: null, triggerUpdate: false },
     tooltipContent: { default: d => '', triggerUpdate: false },
     onClick: { triggerUpdate: false }
   },
@@ -187,13 +189,15 @@ export default Kapsule({
         (state.onClick || this.zoomToNode)(d.data);
       })
       .on('mouseover', d => {
-        state.tooltip.style('display', 'inline');
+        state.tooltip.style('display', state.showTooltip(d.data, d) ? 'inline' : 'none');
         state.tooltip.html(`
           <div class="tooltip-title">
-            ${getNodeStack(d)
-              .slice(state.excludeRoot ? 1 : 0)
-              .map(d => nameOf(d.data))
-              .join(' &rarr; ')
+            ${state.tooltipTitle
+              ? state.tooltipTitle(d.data, d)
+              : getNodeStack(d)
+                .slice(state.excludeRoot ? 1 : 0)
+                .map(d => nameOf(d.data))
+                .join(' &rarr; ')
             }
           </div>
           ${state.tooltipContent(d.data, d)}
