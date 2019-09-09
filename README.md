@@ -61,6 +61,7 @@ myChart
 | <b>zoomToNode</b>([<i>node</i>]) | Programmatically zoom the chart to a particular node. | |
 | <b>zoomBy</b>([<i>number</i>]) | Programmatically zoom the chart by a specific amount. `1` is unity, above one indicates a zoom-in and below a zoom-out. | |
 | <b>zoomReset</b>() | Programmatically reset the zoom to the global view. | |
+| <b>onHover</b>([<i>fn</i>]) | Callback function for mouse hover events. Includes the data node object (or `null` if hovering on background) as single argument. | |
 | <b>onClick</b>([<i>fn</i>]) | Callback function for click events. Includes the data node object (or `null` if clicking on the background) as single argument. A falsy value (default) automatically zooms on clicked nodes, equivalent to `myChart.onClick(myChart.zoomToNode)`. | |
 
 ## Data syntax

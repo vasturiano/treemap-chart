@@ -33,7 +33,8 @@ export default Kapsule({
     showTooltip: { default: d => true, triggerUpdate: false},
     tooltipTitle: { default: null, triggerUpdate: false },
     tooltipContent: { default: d => '', triggerUpdate: false },
-    onClick: { triggerUpdate: false }
+    onClick: { triggerUpdate: false },
+    onHover: { triggerUpdate: false }
   },
   methods: {
     zoomBy: function(state, k) {
@@ -133,7 +134,8 @@ export default Kapsule({
       });
 
     state.svg
-      .on('click', () => (state.onClick || this.zoomReset)(null)); // By default reset zoom when clicking on canvas
+      .on('click', () => (state.onClick || this.zoomReset)(null)) // By default reset zoom when clicking on canvas
+      .on('mouseover', () => state.onHover && state.onHover(null));
   },
   update: function(state) {
     if (state.needsReparse) {
@@ -189,6 +191,9 @@ export default Kapsule({
         (state.onClick || this.zoomToNode)(d.data);
       })
       .on('mouseover', d => {
+        d3Event.stopPropagation();
+        state.onHover && state.onHover(d.data);
+
         state.tooltip.style('display', state.showTooltip(d.data, d) ? 'inline' : 'none');
         state.tooltip.html(`
           <div class="tooltip-title">
