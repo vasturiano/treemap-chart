@@ -68,7 +68,7 @@ myChart
 
 ```
 {
-  name: "root"
+  name: "root",
   children: [
     {
       name: "leafA",
