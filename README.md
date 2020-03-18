@@ -57,7 +57,7 @@ myChart
 | <b>showLabels</b>([<i>boolean</i>]) | Getter/setter for whether to show labels in the nodes. Regardless of this setting, labels too large to fit within a block's width are automatically hidden. | `true` |
 | <b>showTooltip</b>([<i>fn</i>]) | Getter/setter to specify a node object tooltip's visibility. If this function returns `false` for a particular node, that node's tooltip will not display at all. If unspecified, all nodes' tooltips will display. | `() => true` |
 | <b>tooltipTitle</b>([<i>fn</i>]) | Getter/setter for a node object tooltip title. The function should return a string to be displayed in bold in the first line of the tooltip. If unspecified, the full hierarchical name will be displayed. | |
-| <b>tooltipContent</b>([<i>string</i> or <i>fn</i>]) | Getter/setter for a node object tooltip content accessor. Use this to specify extra content in each of the block's tooltips in addition to the title set in `tooltipTitle`. | |
+| <b>tooltipContent</b>([<i>fn</i>]) | Getter/setter for a node object tooltip content. Use this to specify extra content in each of the block's tooltips in addition to the title set in `tooltipTitle`. | |
 | <b>zoomToNode</b>([<i>node</i>]) | Programmatically zoom the chart to a particular node. | |
 | <b>zoomBy</b>([<i>number</i>]) | Programmatically zoom the chart by a specific amount. `1` is unity, above one indicates a zoom-in and below a zoom-out. | |
 | <b>zoomReset</b>() | Programmatically reset the zoom to the global view. | |
