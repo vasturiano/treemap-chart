@@ -30,6 +30,10 @@
   fill: #F7F7F7;
 }
 
+.treemap-viz {
+  position: relative;
+}
+
 .treemap-tooltip {
   display: none;
   position: absolute;
