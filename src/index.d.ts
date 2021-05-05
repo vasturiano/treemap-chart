@@ -47,6 +47,8 @@ export interface TreemapChartGenericInstance<ChainableInstance> {
   padding(padding: number): ChainableInstance;
   color(): NodeAccessor<string>;
   color(colorAccessor: NodeAccessor<string>): ChainableInstance;
+  nodeClassName(): NodeAccessor<string>;
+  nodeClassName(nodeClassName: NodeAccessor<string>): NodeAccessor<string>;
 
   minBlockArea(): number;
   minBlockArea(area: number): ChainableInstance;

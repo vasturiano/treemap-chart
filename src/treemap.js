@@ -27,6 +27,7 @@ export default Kapsule({
     },
     padding: { default: 2.5, onChange(_, state) { state.needsReparse = true }},
     color: { default: d => 'lightgrey' },
+    nodeClassName: {}, // Additional css classes to add on each block node
     minBlockArea: { default: 100 },
     excludeRoot: { default: false, onChange(_, state) { state.needsReparse = true }},
     showLabels: { default: true },
@@ -163,6 +164,7 @@ export default Kapsule({
 
     const nameOf = accessorFn(state.label);
     const colorOf = accessorFn(state.color);
+    const nodeClassNameOf = accessorFn(state.nodeClassName);
 
     const animate = !state.skipTransitionsOnce;
     state.skipTransitionsOnce = false;
@@ -173,7 +175,6 @@ export default Kapsule({
 
     // Entering
     const newCell = cell.enter().append('g')
-      .attr('class', 'node')
       .attr('transform', d => `translate(${d.x0 + (d.x1 - d.x0)/2},${d.y0 + (d.y1 - d.y0)/2})`);
 
     newCell.append('rect')
@@ -219,6 +220,11 @@ export default Kapsule({
 
     // Entering + Updating
     const allCells = cell.merge(newCell);
+
+    allCells.attr('class', d => [
+      'node',
+      ...(`${nodeClassNameOf(d.data) || ''}`.split(' ').map(str => str.trim()))
+    ].filter(s => s).join(' '));
 
     allCells.transition(transition)
       .attr('transform', d => `translate(${d.x0},${d.y0})`);
