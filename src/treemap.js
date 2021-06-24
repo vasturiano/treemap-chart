@@ -10,7 +10,6 @@ import accessorFn from 'accessor-fn';
 
 const LABELS_WIDTH_OPACITY_SCALE = scaleLinear().domain([4, 8]).clamp(true); // px per char
 const LABELS_HEIGHT_OPACITY_SCALE = scaleLinear().domain([6, 18]).clamp(true); // available height in px
-const TRANSITION_DURATION = 800;
 
 export default Kapsule({
 
@@ -35,15 +34,16 @@ export default Kapsule({
     tooltipTitle: { default: null, triggerUpdate: false },
     tooltipContent: { default: d => '', triggerUpdate: false },
     onClick: { triggerUpdate: false },
-    onHover: { triggerUpdate: false }
+    onHover: { triggerUpdate: false },
+    transitionDuration: { default: 800, triggerUpdate: false }
   },
   methods: {
     zoomBy: function(state, k) {
-      state.zoom.zoomBy(k, TRANSITION_DURATION);
+      state.zoom.zoomBy(k, state.transitionDuration);
       return this;
     },
     zoomReset: function(state) {
-      state.zoom.zoomReset(TRANSITION_DURATION);
+      state.zoom.zoomReset(state.transitionDuration);
       return this;
     },
     zoomToNode: function(state, d = {}) {
@@ -63,7 +63,7 @@ export default Kapsule({
           ))
         };
 
-        state.zoom.zoomTo(tr, TRANSITION_DURATION);
+        state.zoom.zoomTo(tr, state.transitionDuration);
       }
       return this;
     },
@@ -168,7 +168,7 @@ export default Kapsule({
 
     const animate = !state.skipTransitionsOnce;
     state.skipTransitionsOnce = false;
-    const transition = d3Transition().duration(animate ? TRANSITION_DURATION: 0);
+    const transition = d3Transition().duration(animate ? state.transitionDuration: 0);
 
     // Exiting
     cell.exit().transition(transition).remove();
