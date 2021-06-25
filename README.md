@@ -64,6 +64,7 @@ myChart
 | <b>zoomReset</b>() | Programmatically reset the zoom to the global view. | |
 | <b>onHover</b>([<i>fn</i>]) | Callback function for mouse hover events. Includes the data node object (or `null` if hovering on background) as single argument. | |
 | <b>onClick</b>([<i>fn</i>]) | Callback function for click events. Includes the data node object (or `null` if clicking on the background) as single argument. A falsy value (default) automatically zooms on clicked nodes, equivalent to `myChart.onClick(myChart.zoomToNode)`. | |
+| <b>transitionDuration</b>([<i>number</i>]) | Getter/setter for the animation duration of transitions between states (opening, zoom in/out) in milliseconds. Enter `0` to disable animations. | `800` |
 
 ## Data syntax
 
