@@ -56,7 +56,7 @@ export interface TreemapChartGenericInstance<ChainableInstance> {
   excludeRoot(exclude: boolean): ChainableInstance;
 
   sort(): CompareFn<Node> | null;
-  sort(cmpFn: CompareFn<Node> | null);
+  sort(cmpFn: CompareFn<Node> | null): ChainableInstance;
 
   showLabels(): boolean;
   showLabels(show: boolean): ChainableInstance;
