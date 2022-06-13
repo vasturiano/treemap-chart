@@ -172,7 +172,7 @@ export default Kapsule({
       .attr('id', d => `rect-${d.id}`)
       .attr('width', 0)
       .attr('height', 0)
-      .style('stroke-width', 1)
+      .style('stroke-width', '1px')
       .on('click', (ev, d) => {
         ev.stopPropagation();
         (state.onClick || this.zoomToNode)(d.data);
@@ -223,7 +223,7 @@ export default Kapsule({
       .attr('width', d => d.x1 - d.x0)
       .attr('height', d => d.y1 - d.y0)
       .style('fill', d => colorOf(d.data, d.parent))
-      .style('stroke-width', 1 / zoomTr.k);
+      .style('stroke-width', `${1 / zoomTr.k}px`);
 
     allCells.select('g.label-container')
       .style('display', state.showLabels ? null : 'none')
