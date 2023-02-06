@@ -3,11 +3,16 @@
   "version": "1.6.1",
   "description": "A treemap interactive chart web component for visualizing hierarchical data",
   "license": "MIT",
+  "type": "module",
   "unpkg": "dist/treemap-chart.min.js",
   "jsdelivr": "dist/treemap-chart.min.js",
-  "main": "dist/treemap-chart.common.js",
-  "module": "dist/treemap-chart.module.js",
+  "main": "dist/treemap-chart.mjs",
+  "module": "dist/treemap-chart.mjs",
   "types": "dist/treemap-chart.d.ts",
+  "exports": {
+    "umd": "./dist/treemap-chart.min.js",
+    "default": "./dist/treemap-chart.mjs"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vasturiano/treemap-chart.git"
@@ -45,23 +50,24 @@
     "d3-transition": "2 - 3",
     "d3-zoomable": "1",
     "float-tooltip": "1",
-    "kapsule": "^1.13",
-    "tinycolor2": "^1.4"
+    "kapsule": "^1.14",
+    "tinycolor2": "^1.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-object-rest-spread": "^7.18.0",
-    "@babel/preset-env": "^7.18.2",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.0",
-    "@rollup/plugin-node-resolve": "^13.3.0",
-    "postcss": "^8.4.14",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.75.6",
-    "rollup-plugin-dts": "^4.2.2",
+    "@babel/core": "^7.20.12",
+    "@babel/preset-env": "^7.20.2",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.0.1",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "postcss": "^8.4.21",
+    "rimraf": "^4.1.2",
+    "rollup": "^3.14.0",
+    "rollup-plugin-dts": "^5.1.1",
     "rollup-plugin-postcss": "^4.0.2",
-    "rollup-plugin-terser": "^7.0.2",
-    "typescript": "^4.7.3"
+    "typescript": "^4.9.5"
+  },
+  "engines": {
+    "node": ">=12"
   }
 }
