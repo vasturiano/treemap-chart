@@ -58,8 +58,9 @@ myChart
 | <b>zoomToNode</b>([<i>node</i>]) | Programmatically zoom the chart to a particular node. | |
 | <b>zoomBy</b>([<i>number</i>]) | Programmatically zoom the chart by a specific amount. `1` is unity, above one indicates a zoom-in and below a zoom-out. | |
 | <b>zoomReset</b>() | Programmatically reset the zoom to the global view. | |
-| <b>onHover</b>([<i>fn</i>]) | Callback function for mouse hover events. Includes the data node object (or `null` if hovering on background) as single argument. | |
-| <b>onClick</b>([<i>fn</i>]) | Callback function for click events. Includes the data node object (or `null` if clicking on the background) as single argument. A falsy value (default) automatically zooms on clicked nodes, equivalent to `myChart.onClick(myChart.zoomToNode)`. | |
+| <b>onHover</b>([<i>fn</i>]) | Callback function for mouse hover events. The data node object (or `null` if hovering on background) and the event object are included as arguments `onHover(node, event)`. | |
+| <b>onClick</b>([<i>fn</i>]) | Callback function for click events. The data node object (or `null` if clicking on the background) and the event object are included as arguments `onClick(node, event)`. A falsy value (default) automatically zooms on clicked nodes, equivalent to `myChart.onClick(myChart.zoomToNode)`. | |
+| <b>onRightClick</b>([<i>fn</i>]) | Callback function for right-click events. The data node object (or `null` if right-clicking on the background) and the event object are included as arguments `onRightClick(node, event)`. A falsy value (default) will fallback to the default browser behaviour, which is to open the context menu. | |
 | <b>transitionDuration</b>([<i>number</i>]) | Getter/setter for the animation duration of transitions between states (opening, zoom in/out) in milliseconds. Enter `0` to disable animations. | `800` |
 
 ## Data syntax

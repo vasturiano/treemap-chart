@@ -67,8 +67,9 @@ export interface TreemapChartGenericInstance<ChainableInstance> {
   tooltipContent(): TooltipFn;
   tooltipContent(fn: TooltipFn): ChainableInstance;
 
-  onClick(cb: ((node: Node) => void) | null): ChainableInstance;
-  onHover(cb: ((node: Node | null) => void) | null): ChainableInstance;
+  onClick(cb: ((node: Node, event: MouseEvent) => void) | null): ChainableInstance;
+  onRightClick(cb: ((node: Node, event: MouseEvent) => void) | null): ChainableInstance;
+  onHover(cb: ((node: Node | null, event: MouseEvent) => void) | null): ChainableInstance;
 
   zoomToNode(node: Node): ChainableInstance;
   zoomBy(k: number):ChainableInstance;
