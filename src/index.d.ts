@@ -27,60 +27,56 @@ type CompareFn<ItemType> = (a: ItemType, b: ItemType) => number;
 
 type TooltipFn = (node: Node, dataNode: DataNode) => string;
 
-export interface TreemapChartGenericInstance<ChainableInstance> {
-  (element: HTMLElement): ChainableInstance;
+declare class TreemapChart {
+  constructor(element: HTMLElement, configOptions?: ConfigOptions);
 
   width(): number;
-  width(width: number): ChainableInstance;
+  width(width: number): TreemapChart;
   height(): number;
-  height(height: number): ChainableInstance;
+  height(height: number): TreemapChart;
 
   data(): Node;
-  data(rootNode: Node): ChainableInstance;
+  data(rootNode: Node): TreemapChart;
   children(): NodeAccessor<Node[]>;
-  children(childrenAccessor: NodeAccessor<Node[]>): ChainableInstance;
+  children(childrenAccessor: NodeAccessor<Node[]>): TreemapChart;
   label(): NodeAccessor<string>;
-  label(textAccessor: NodeAccessor<string>): ChainableInstance;
+  label(textAccessor: NodeAccessor<string>): TreemapChart;
   size(): NodeAccessor<string>;
-  size(sizeAccessor: NodeAccessor<string>): ChainableInstance;
+  size(sizeAccessor: NodeAccessor<string>): TreemapChart;
   padding(): number;
-  padding(padding: number): ChainableInstance;
+  padding(padding: number): TreemapChart;
   color(): NodeAccessor<string>;
-  color(colorAccessor: NodeAccessor<string>): ChainableInstance;
+  color(colorAccessor: NodeAccessor<string>): TreemapChart;
   nodeClassName(): NodeAccessor<string>;
-  nodeClassName(nodeClassName: NodeAccessor<string>): ChainableInstance;
+  nodeClassName(nodeClassName: NodeAccessor<string>): TreemapChart;
 
   minBlockArea(): number;
-  minBlockArea(area: number): ChainableInstance;
+  minBlockArea(area: number): TreemapChart;
   excludeRoot(): boolean;
-  excludeRoot(exclude: boolean): ChainableInstance;
+  excludeRoot(exclude: boolean): TreemapChart;
 
   sort(): CompareFn<Node> | null;
-  sort(cmpFn: CompareFn<Node> | null): ChainableInstance;
+  sort(cmpFn: CompareFn<Node> | null): TreemapChart;
 
   showLabels(): boolean;
-  showLabels(show: boolean): ChainableInstance;
+  showLabels(show: boolean): TreemapChart;
   showTooltip(): (node: Node) => boolean;
-  showTooltip(showTooltipFn: (node: Node) => boolean): ChainableInstance;
+  showTooltip(showTooltipFn: (node: Node) => boolean): TreemapChart;
   tooltipTitle(): TooltipFn;
-  tooltipTitle(fn: TooltipFn): ChainableInstance;
+  tooltipTitle(fn: TooltipFn): TreemapChart;
   tooltipContent(): TooltipFn;
-  tooltipContent(fn: TooltipFn): ChainableInstance;
+  tooltipContent(fn: TooltipFn): TreemapChart;
 
-  onClick(cb: ((node: Node, event: MouseEvent) => void) | null): ChainableInstance;
-  onRightClick(cb: ((node: Node, event: MouseEvent) => void) | null): ChainableInstance;
-  onHover(cb: ((node: Node | null, event: MouseEvent) => void) | null): ChainableInstance;
+  onClick(cb: ((node: Node, event: MouseEvent) => void) | null): TreemapChart;
+  onRightClick(cb: ((node: Node, event: MouseEvent) => void) | null): TreemapChart;
+  onHover(cb: ((node: Node | null, event: MouseEvent) => void) | null): TreemapChart;
 
-  zoomToNode(node: Node): ChainableInstance;
-  zoomBy(k: number):ChainableInstance;
-  zoomReset():ChainableInstance;
+  zoomToNode(node: Node): TreemapChart;
+  zoomBy(k: number):TreemapChart;
+  zoomReset():TreemapChart;
 
   transitionDuration(): number;
-  transitionDuration(duration: number): ChainableInstance;
+  transitionDuration(duration: number): TreemapChart;
 }
-
-export type TreemapChartInstance = TreemapChartGenericInstance<TreemapChartInstance>;
-
-declare function TreemapChart(configOptions?: ConfigOptions): TreemapChartInstance;
 
 export default TreemapChart;

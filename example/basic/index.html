@@ -38,10 +38,9 @@
       }]
     };
 
-    Treemap()
+    new Treemap(document.getElementById('chart'))
       .data(data)
       .size('size')
-      .color('color')
-      (document.getElementById('chart'));
+      .color('color');
   </script>
 </body>

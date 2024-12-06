@@ -29,10 +29,8 @@ or using a *script* tag
 ```
 then
 ```js
-const myChart = Treemap();
-myChart
-  .data(<myData>)
-  (<myDOMElement>);
+const myChart = new Treemap(<myDOMElement>)
+  .data(<myData>);
 ```
 
 ## API reference
