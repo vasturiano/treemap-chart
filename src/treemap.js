@@ -104,7 +104,7 @@ export default Kapsule({
     state.svg = el.append('svg');
     state.canvas = state.svg.append('g');
 
-    state.tooltip = Tooltip()(el);
+    state.tooltip = new Tooltip(el);
 
     // zoom/pan
     state.zoom(state.svg)

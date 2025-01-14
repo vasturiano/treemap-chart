@@ -30,11 +30,6 @@
   fill: #F7F7F7;
 }
 
-.treemap-viz .tooltip {
-  max-width: 320px;
-  white-space: nowrap;
-}
-
 .treemap-viz .tooltip-title {
   font-weight: bold;
   text-align: center;
