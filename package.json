@@ -10,6 +10,7 @@
   "module": "dist/treemap-chart.mjs",
   "types": "dist/treemap-chart.d.ts",
   "exports": {
+    "types": "./dist/treemap-chart.d.ts",
     "umd": "./dist/treemap-chart.min.js",
     "default": "./dist/treemap-chart.mjs"
   },
