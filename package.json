@@ -1,6 +1,6 @@
 {
   "name": "treemap-chart",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "description": "A treemap interactive chart web component for visualizing hierarchical data",
   "license": "MIT",
   "type": "module",
