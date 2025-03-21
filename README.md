@@ -25,7 +25,7 @@ import Treemap from 'treemap-chart';
 ```
 or using a *script* tag
 ```html
-<script src="//unpkg.com/treemap-chart"></script>
+<script src="//cdn.jsdelivr.net/npm/treemap-chart"></script>
 ```
 then
 ```js
